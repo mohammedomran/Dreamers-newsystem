@@ -1,0 +1,32 @@
+﻿@page
+@model Dreamers.Ui.Pages.Admin.Excursions.ListModel
+@{
+    Layout = "../_AdminLayout";
+}
+
+
+<a href="insert">Add Excursion</a>
+<form class="row" method="post">
+
+    <div class="form-group col-6">
+        <label>Name</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Name">
+    </div>
+    <div class="form-group col-6">
+        <label>Price</label>
+        <input type="number" class="form-control" asp-for="ExcursionAddDto.Price">
+    </div>
+
+    <div class="form-group col-6">
+        <label>MainPhoto</label>
+        <input type="file" class="form-control" asp-for="ExcursionAddDto.MainPhoto">
+    </div>
+    <div class="form-group col-6">
+        <label>Banner Photo</label>
+        <input type="file" class="form-control" asp-for="ExcursionAddDto.BannerPhoto">
+    </div>
+
+    <div class="form-group col-6">
+        <button type="submit" class="form-control btn btn-primary">Submit</button>
+    </div>
+</form>

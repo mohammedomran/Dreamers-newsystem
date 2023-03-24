@@ -1,0 +1,125 @@
+﻿@model Dreamers.Ui.Dtos.ExcursionBookingDto;
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Excursion Booking Confirmation</title>
+	<style>
+		/* Reset styles */
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		img {
+			border: none;
+			display: block;
+		}
+
+		table {
+			border-collapse: collapse;
+			mso-table-lspace: 0pt;
+			mso-table-rspace: 0pt;
+		}
+
+		td, th {
+			padding: 0;
+		}
+
+		/* Main styles */
+		.wrapper {
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+			.header img {
+				max-width: 200px;
+			}
+
+		.content {
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+			.content p {
+				margin: 0 0 20px;
+			}
+
+			.content ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+				.content ul li {
+					margin-bottom: 10px;
+				}
+
+					.content ul li strong {
+						display: inline-block;
+						width: 120px;
+						font-weight: bold;
+					}
+
+		.footer {
+			margin-top: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Business Logo -->
+		<div class="header">
+			<img style="margin:auto;" src="https://i.imgur.com/wfwGaJ8.jpg" alt="Your Business Logo">
+		</div>
+
+		<!-- Customer and Excursion Data -->
+		<div class="content">
+			<h2>Booking Confirmation</h2>
+			<p>Dear @Model.FullName,</p>
+			<p>Thank you for booking the following excursion with us:</p>
+			<table style="text-align:left;">
+				<tr>
+					<th>Excursion:</th>
+					<td>@Model.Excursion</td>
+				</tr>
+				<tr>
+					<th>Date:</th>
+					<td>@Model.CheckIn</td>
+				</tr>
+				<tr>
+					<th>No. of Adults:</th>
+					<td>@Model.Adults</td>
+				</tr>
+				<tr>
+					<th>No. of Children:</th>
+					<td>@Model.Children</td>
+				</tr>
+				<tr>
+					<th>Total Price:</th>
+					<td>@Model.Total $</td>
+				</tr>
+			</table>
+			<p>If you have any questions or need to make changes to your booking, please contact us:</p>
+			<ul>
+				<li><strong>Email:</strong> dreamers_team@hotmail.com</li>
+				<li><strong>Phone:</strong> +201149538054</li>
+				<li><strong>Address:</strong> Hurghada, Egypt</li>
+				<li><strong>Website:</strong> dreamersteams.com</li>
+			</ul>
+		</div>
+
+		<!-- Business Contact Details -->
+		<div class="footer">
+			<p>Best regards,<br>[Your Business Name]</p>
+		</div>
+	</div>
+</body>
+</html>

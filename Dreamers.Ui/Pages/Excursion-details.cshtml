@@ -1,0 +1,228 @@
+﻿@page
+@model Dreamers.Ui.Pages.Excursion_detailsModel
+@{
+}
+
+
+<div class="pages-hero" style="background-image:url(/photos/banners/excursions.jpg" )">
+    <div class="container">
+        <div class="pages-title">
+            <h1>Tours</h1>
+            <p class="text-white" style="width:70%">banner description banner description banner description banner description banner description banner description banner description banner description banner description </p>
+            <div class="page-nav">
+                <p><a href="/">Home</a> &nbsp; | &nbsp; <a href="/excursions">Excursions</a> | &nbsp; @Model.Excursion.Title</p>
+            </div>
+        </div>
+    </div>
+    <div class="social-media">
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- CONTENT START -->
+<section>
+    <div class="container mt-5 mb-5">
+        <div class="row no-gutters">
+            <div class="col-lg-8">
+                <div class="feature-img" style="background-image:url('@Model.Excursion.ExcursionPhotos?.FirstOrDefault()?.PhotoPath');">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature-img-thumb" style="background-image:url('@Model.Excursion.ExcursionPhotos?.Skip(1)?.FirstOrDefault().PhotoPath');">
+                </div>
+                <div class="feature-img-thumb" style="background-image:url('@Model.Excursion.ExcursionPhotos?.Skip(2)?.FirstOrDefault()?.PhotoPath');">
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-description">
+            <p>
+                @Html.Raw(Model.Excursion.Description)
+            </p>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <h3>Book Your Trip Now</h3>
+                <br>
+                <form method="post">
+                    <div class="messages"></div>
+                    <div class="controls">
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.Name" placeholder="*Name" required="required" data-error="Firstname is required.">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email"
+                                           asp-for="ExcursionBookingModel.Email" class="form-control custom-form" placeholder="*Email address"
+                                           required="required" data-error="Valid email is required.">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Adults number</label>
+                                    <input type="number" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.AdultsNumber" value="1" placeholder="*Please enter adults number">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Children number</label>
+                                    <input type="number" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.ChildrenNumber" placeholder="*Please enter your children number">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Checkin date</label>
+                                    <input type="date" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.CheckIn" value="@DateTime.Today.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="*Please enter your checkin date">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Hotel</label>
+                                    <input type="text" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.Hotel" placeholder="*Please enter your hotel">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Room</label>
+                                    <input id="form_phone" type="text" class="form-control custom-form"
+                                           asp-for="ExcursionBookingModel.Room" placeholder="*Please enter your room">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea name="message"
+                                              class="form-control message-form custom-form" placeholder="*Your message"
+                                              rows="6" required="required"
+                                              data-error="Please,leave us a message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12 btn-send">
+                                <p><input type="submit" class="btn btn-default" value="Send message"></p>
+                            </div>
+                            <div class="col-sm-12">
+                                <p class="required">
+                                    * These fields are required.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-4 spacing-md">
+                <aside class="aside-right">
+                    <div class="inner-aside">
+                        <figure class="promo-banner">
+                            <img src="https://via.placeholder.com//992x1200" alt="">
+                        </figure>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    @*<div class="thumb-carousel">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <a href="#">
+                    <figure class="tour-hover">
+                        <img src="https://via.placeholder.com//992x660" alt="" />
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
+                            <h3>Scuba <span> Diving</span></h3>
+                            <p>Coastline First Discovered</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <figure class="tour-hover">
+                        <img src="https://via.placeholder.com//992x660" alt="" />
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
+                            <h3>Paragliding  <span> Fly</span></h3>
+                            <p>Highest Mountain Ranges</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <figure class="tour-hover">
+                        <img src="https://via.placeholder.com//992x660" alt="" />
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
+                            <h3>Mountain  <span> Bike</span></h3>
+                            <p>Komodo National Park</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <figure class="tour-hover">
+                        <img src="https://via.placeholder.com//992x660" alt="" />
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
+                            <h3>Yacth <span> Excursion</span></h3>
+                            <p>Swim with Manta Rays</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <figure class="tour-hover">
+                        <img src="https://via.placeholder.com//992x660" alt="" />
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
+                            <h3>Horse <span> Riding</span></h3>
+                            <p>Guided Horseback Ride</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        <div class="owl-theme">
+            <div class="owl-controls">
+                <div class="custom-nav owl-nav"></div>
+            </div>
+        </div>
+    </div>*@
+</section>
+<!-- CONTENT END -->

@@ -1,0 +1,102 @@
+﻿@page
+@model Dreamers.Ui.Pages.ExcursionsModel
+@{
+}
+
+
+<div class="pages-hero" style="background-image:url(/photos/banners/excursions.jpg" )">
+    <div class="container">
+        <div class="pages-title">
+            <h1>Tours</h1>
+            <p class="text-white" style="width:70%">banner description banner description banner description banner description banner description banner description banner description banner description banner description </p>
+            <div class="page-nav">
+                <p><a href="/">Home</a> &nbsp; | &nbsp; <a href="/excursions">Excursions</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="social-media">
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- CONTENT START -->
+<section>
+    <!-- PROJECT GRID START -->
+    <div class="container-fluid mt-5 mb-5">
+        @*<div class="filter-container">
+        <div class="row">
+        <div class="col-md-6 mx-auto">
+        <ul class="filter">
+        <li class="active" data-filter="*">All</li>
+        <li data-filter=".atv">ATV</li>
+        <li data-filter=".diving">Diving</li>
+        <li data-filter=".paragliding">Paragliding</li>
+        </ul>
+        </div>
+        </div>
+        </div>*@
+        <div class="grid grid-four-col image-hover" id="kehl-grid">
+            <div class="grid-sizer"></div>
+            @foreach (var excursion in Model.Excursions)
+            {
+                <div class="grid-box atv">
+                    <figure class="activty-img zoom-in">
+                        <a href="/excursions/@excursion.Name">
+                            <div class="price-layer rounded-pill">
+                                <div class="price-box">
+                                    <h4>$ @excursion.Price</h4>
+                                </div>
+                            </div>
+
+                            <img src="@excursion.MainPhotoPath" alt="@excursion.Title">
+                            <div class="activitie-info">
+                                <h4>@excursion.Title</h4>
+                                <div class="media">
+                                    @*<h3 class="mt-0">8.8</h3>
+                                    <div class="media-body">
+                                        <ul class="activity-rating">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star-half-alt"></i></li>
+                                        </ul>
+                                        <p class="rating-count">411 Ratings</p>
+                                    </div>*@
+                                </div>
+                                <p>@excursion.Introduction</p>
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- PROJECT GRID END -->
+    <!-- CALL TO ACTION START -->
+    <div class="container mt-5 mb-5">
+        <div class="call-action-wrapper">
+            <div class="row">
+                <div class="col-md-12 col-lg-6">
+                    <div class="ca-left-side">
+                        <h3>Need Help With Your Tour</h3>
+                        <p>Send us a message and one of our experts will contact you.</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="ca-right-side flex-parent jc-center">
+                        <a class="btn btn-default" href="/contact-us" role="button">Request a Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CALL TO ACTION END -->
+
+</section>
+<!-- CONTENT END -->

@@ -1,0 +1,29 @@
+﻿@page
+@model Dreamers.Ui.Pages.ReceiptModel
+@{
+}
+
+
+<div class="pages-hero" style="height:350px;background-image:url('/photos/banners/excursions.jpg')">
+    <div class="container">
+        <div class="pages-title">
+            <h1>Receipt</h1>
+            <p class="text-white">You boking reference number : @Model.BookingKey</p>
+            <div class="page-nav">
+                <p><a href="/">Home</a> &nbsp; | &nbsp; Receipt</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <img style="width:120px" src="/images/accept.png" />
+                <h1 class="mt-3 mb-3">Thanks for your booking with us</h1>
+                <p>We'll send you a confirmation email .. stay tuned !</p>
+            </div>
+        </div>
+    </div>
+</section>
