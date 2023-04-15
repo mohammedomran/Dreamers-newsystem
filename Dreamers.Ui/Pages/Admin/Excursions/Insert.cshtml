@@ -1,0 +1,70 @@
+﻿@page
+@model Dreamers.Ui.Pages.Admin.Excursions.InsertModel
+@{
+    Layout = "../_AdminLayout";
+}
+
+
+<form class="row" method="post" enctype="multipart/form-data">
+
+    <div class="form-group col-6">
+        <label>Name</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Name">
+    </div>
+    <div class="form-group col-6">
+        <label>Price</label>
+        <input type="number" class="form-control" asp-for="ExcursionAddDto.Price">
+    </div>
+
+    <div class="form-group col-6">
+        <label>MainPhoto</label>
+        <input type="file" class="form-control" asp-for="ExcursionAddDto.MainPhoto">
+    </div>
+    <div class="form-group col-6">
+        <label>Banner Photo</label>
+        <input type="file" class="form-control" asp-for="ExcursionAddDto.BannerPhoto">
+    </div>
+    <div class="form-group col-6">
+        <label>Excursion Photos</label>
+        <input type="file" multiple class="form-control" asp-for="ExcursionAddDto.Photos">
+    </div>
+
+    <div class="form-group col-12">
+        <label>Video link</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.VideoLink">
+    </div>
+
+
+
+    <div class="form-group col-12">
+        <label>Title</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Title">
+    </div>
+
+    <div class="form-group col-6">
+        <label>Period</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Period">
+    </div>
+    <div class="form-group col-6">
+        <label>City</label>
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.City">
+    </div>
+    
+    <div class="form-group col-12">
+        <label>Introduction</label>
+        <textarea class="form-control" asp-for="ExcursionAddDto.Introduction"></textarea>
+    </div>
+    <div class="form-group col-12">
+        <label>Description</label>
+        <textarea class="form-control" rows="4" asp-for="ExcursionAddDto.Description"></textarea>
+    </div>
+
+    <div class="form-group col-12">
+        <label>Banner Description</label>
+        <textarea class="form-control" asp-for="ExcursionAddDto.BannerDescription"></textarea>
+    </div>
+
+    <div class="form-group col-6">
+        <button type="submit" class="form-control btn btn-primary">Submit</button>
+    </div>
+</form>

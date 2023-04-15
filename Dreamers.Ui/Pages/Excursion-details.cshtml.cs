@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
+using System.Text.RegularExpressions;
 using X.Paymob.CashIn;
 using X.Paymob.CashIn.Models.Payment;
 
@@ -36,7 +37,10 @@ namespace Dreamers.Ui.Pages
         {
             var excursionUrl = Request.Path.ToString()?.Split("/").LastOrDefault();
             Excursion = excursionRepo.GetExcursion(excursionUrl);
-
+            if (Excursion is null)
+            {
+                return Redirect("/error");
+            }
             return Page();
         }
 
@@ -75,12 +79,38 @@ namespace Dreamers.Ui.Pages
         private decimal calculateTotalPrice()
         {
             return ExcursionBookingModel.AdultsNumber * Excursion.Price +
-                   (ExcursionBookingModel.ChildrenNumber * (Excursion.Price/2));
+                   (ExcursionBookingModel.ChildrenNumber * (Excursion.Price / 2));
         }
 
         private int generateOrderKey()
         {
             return new Random().Next(1_000_000, 9_999_999);
         }
+
+
+        public string ConvertToEmbedLink(string youtubeLink)
+        {
+            // Define the regular expression pattern to match YouTube links
+            string pattern = @"^(https:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})";
+
+            // Create a regex object with the pattern
+            Regex regex = new Regex(pattern);
+
+            // Match the input YouTube link against the pattern
+            Match match = regex.Match(youtubeLink);
+
+            // If a match is found, extract the video ID and construct the embed link
+            if (match.Success)
+            {
+                string videoId = match.Groups[4].Value;
+                string embedLink = $"https://www.youtube.com/embed/{videoId}";
+                return embedLink;
+            }
+
+            // If no match is found, return null or an empty string, or throw an exception, depending on your desired behavior
+            return null;
+        }
+
+
     }
 }

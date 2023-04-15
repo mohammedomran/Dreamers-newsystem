@@ -4,29 +4,32 @@
     Layout = "../_AdminLayout";
 }
 
-
-<a href="insert">Add Excursion</a>
-<form class="row" method="post">
-
-    <div class="form-group col-6">
-        <label>Name</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.Name">
-    </div>
-    <div class="form-group col-6">
-        <label>Price</label>
-        <input type="number" class="form-control" asp-for="ExcursionAddDto.Price">
-    </div>
-
-    <div class="form-group col-6">
-        <label>MainPhoto</label>
-        <input type="file" class="form-control" asp-for="ExcursionAddDto.MainPhoto">
-    </div>
-    <div class="form-group col-6">
-        <label>Banner Photo</label>
-        <input type="file" class="form-control" asp-for="ExcursionAddDto.BannerPhoto">
-    </div>
-
-    <div class="form-group col-6">
-        <button type="submit" class="form-control btn btn-primary">Submit</button>
-    </div>
-</form>
+<a href="/admin/excursions/insert">Add Excursion</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var excursion in Model.Excursions)
+        {
+            <tr>
+                <th>@excursion.Id</th>
+                <td><img height="50" src="@excursion.MainPhotoPath" /></td>
+                <td>@excursion.Name</td>
+                <td>@excursion.Price $</td>
+                <td>@excursion.DateCreated?.ToShortDateString()</td>
+                <th>
+                    <a href="/admin/excursions/edit/@excursion.Id">Edit</a>
+                    <a class="text-danger" href=".#">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

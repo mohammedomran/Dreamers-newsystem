@@ -11,11 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 {
+    options.Conventions.AddPageRoute("/admin/excursions/list", "admin/excursions");
+    //options.Conventions.AddPageRoute("/admin/excursions/insert", "admin/excursions/insert");
+    options.Conventions.AddPageRoute("/admin/excursions/edit", "admin/excursions/edit/{excursionId}");
+
     options.Conventions.AddPageRoute("/excursion-details", "excursions/{excursionUrlName}");
     options.Conventions.AddPageRoute("/receipt", "receipt/{bookingKey}");
 });
 
 builder.Services.AddScoped<ExcursionRepo>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();
 
