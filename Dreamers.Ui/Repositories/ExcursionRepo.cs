@@ -1,4 +1,5 @@
-﻿using Dreamers.Ui.Enums;
+﻿using Dreamers.Ui.Dtos;
+using Dreamers.Ui.Enums;
 using Dreamers.Ui.Interfaces;
 using Dreamers.Ui.Models;
 using Microsoft.EntityFrameworkCore;
@@ -83,6 +84,60 @@ namespace Dreamers.Ui.Repositories
             string urlPageName = cleanedInput.Replace(" ", "-");
 
             return urlPageName;
+        }
+
+        internal IQueryable<Excursion> GeteFeaturedExcursions()
+        {
+            return _context.Excursions
+                .Include(x => x.ExcursionLocalizeds)
+                .Include(x => x.ExcursionPhotos)
+                .Take(5);
+        }
+
+        internal object UpdateExcursion(Excursion excursion)
+        {
+            var excursionToBeUpdated = _context.Excursions.Include(x => x.ExcursionLocalizeds)
+                .Include(x => x.ExcursionPhotos)
+                .FirstOrDefault(x => x.Id == excursion.Id);
+
+            excursionToBeUpdated.Name = excursion.Name;
+            excursionToBeUpdated.Price = excursion.Price;
+            excursionToBeUpdated.VideoLink = excursion.VideoLink;
+
+            var excursionLocalized = excursionToBeUpdated.ExcursionLocalizeds.FirstOrDefault();
+            excursionLocalized.BannerDescription = excursion.ExcursionLocalizeds.FirstOrDefault().BannerDescription;
+            excursionLocalized.Description = excursion.ExcursionLocalizeds.FirstOrDefault().Description;
+            excursionLocalized.Introduction = excursion.ExcursionLocalizeds.FirstOrDefault().Introduction;
+            excursionLocalized.Title = excursion.ExcursionLocalizeds.FirstOrDefault().Title;
+            excursionLocalized.City = excursion.ExcursionLocalizeds.FirstOrDefault().City;
+            excursionLocalized.Period = excursion.ExcursionLocalizeds.FirstOrDefault().Period;
+            _context.SaveChanges();
+            
+            return excursionToBeUpdated;
+        }
+
+        internal Excursion UpdateExcursionMainPhoto(int excursionId, string fileName)
+        {
+            var excursionToBeUpdated = _context.Excursions.Include(x => x.ExcursionLocalizeds)
+                            .Include(x => x.ExcursionPhotos)
+                            .FirstOrDefault(x => x.Id == excursionId);
+
+            excursionToBeUpdated.MainPhoto = fileName;
+            _context.SaveChanges();
+
+            return excursionToBeUpdated;
+        }
+
+        internal Excursion UpdateExcursionBannerPhoto(int excursionId, string fileName)
+        {
+            var excursionToBeUpdated = _context.Excursions.Include(x => x.ExcursionLocalizeds)
+                            .Include(x => x.ExcursionPhotos)
+                            .FirstOrDefault(x => x.Id == excursionId);
+
+            excursionToBeUpdated.BannerPhoto = fileName;
+            _context.SaveChanges();
+
+            return excursionToBeUpdated;
         }
     }
 }

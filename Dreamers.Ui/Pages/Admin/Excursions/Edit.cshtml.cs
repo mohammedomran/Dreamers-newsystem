@@ -9,11 +9,11 @@ namespace Dreamers.Ui.Pages.Admin.Excursions
 {
     public class EditModel : PageModel
     {
-        [BindProperty]
-        public ExcursionAddDto ExcursionAddDto { get; set; } = new ExcursionAddDto();
         public ExcursionRepo ExcursionRepository { get; set; }
         public IFileService FileService { get; set; }
         public Excursion Excursion { get; set; }
+        [BindProperty]
+        public ExcursionAddDto ExcursionAddDto { get; set; } = new ExcursionAddDto();
 
         public EditModel(ExcursionRepo excursionRepository, IFileService fileService)
         {
@@ -24,19 +24,63 @@ namespace Dreamers.Ui.Pages.Admin.Excursions
         public void OnGet(int excursionId)
         {
             Excursion = ExcursionRepository.GetExcursion(excursionId);
+            ExcursionAddDto.Introduction = Excursion.Introduction;
+            ExcursionAddDto.Description = Excursion.Description;
+            ExcursionAddDto.BannerDescription = Excursion.BannerDescription;
+
         }
 
-        public void OnPost()
+        public void OnPostMainPhoto(int excursionId)
         {
-            FileService.UploadFile(ExcursionAddDto.BannerPhoto, "excursions");
-            FileService.UploadFile(ExcursionAddDto.MainPhoto, "excursions");
-            foreach (var file in ExcursionAddDto.Photos)
-                FileService.UploadFile(file, "excursions");
+            Excursion = ExcursionRepository.GetExcursion(excursionId);
 
-            var storedExcursion = ExcursionRepository.StoreExcursion(new Excursion
+            ExcursionAddDto.MainPhoto = Request.Form.Files.GetFile("MainPhoto");
+            FileService.UploadFile(ExcursionAddDto.MainPhoto, "excursions");
+            ExcursionRepository.UpdateExcursionMainPhoto(excursionId, ExcursionAddDto.MainPhoto.FileName);
+        }
+
+        public void OnPostBannerPhoto(int excursionId)
+        {
+            Excursion = ExcursionRepository.GetExcursion(excursionId);
+
+            ExcursionAddDto.MainPhoto = Request.Form.Files.GetFile("BannerPhoto");
+            FileService.UploadFile(ExcursionAddDto.BannerPhoto, "excursions");
+            ExcursionRepository.UpdateExcursionBannerPhoto(excursionId, ExcursionAddDto.BannerPhoto.FileName);
+        }
+
+        public void OnPostExcursionPhotos(int excursionId)
+        {
+            Excursion = ExcursionRepository.GetExcursion(excursionId);
+
+            var submitButtonValue = Request.Form["submitButton"];
+            if (submitButtonValue == "delete")
             {
-                BannerPhoto = ExcursionAddDto.BannerPhoto.FileName,
-                MainPhoto = ExcursionAddDto.MainPhoto.FileName,
+                //ExcursionRepo.DeleteExcursionPhoto(Excursion.Id, );
+            }
+
+            if (submitButtonValue == "storephoto")
+            {
+
+                foreach (var file in ExcursionAddDto.Photos)
+                    FileService.UploadFile(file, "excursions");
+
+                var excursionPhotos = ExcursionAddDto.Photos.Select(x => new ExcursionPhoto
+                {
+                    ExcursionId = Excursion.Id,
+                    Photo = x.FileName
+                }).ToList();
+                ExcursionRepository.StoreExcursionPhotos(Excursion.Id, excursionPhotos);
+
+            }
+        }
+
+        public void OnPostTextData(int excursionId)
+        {
+            Excursion = ExcursionRepository.GetExcursion(excursionId);
+
+            var storedExcursion = ExcursionRepository.UpdateExcursion(new Excursion
+            {
+                Id = Excursion.Id,
                 Name = ExcursionAddDto.Name,
                 Price = ExcursionAddDto.Price,
                 VideoLink = ExcursionAddDto.VideoLink,
@@ -52,12 +96,8 @@ namespace Dreamers.Ui.Pages.Admin.Excursions
                 },
             });
 
-            var excursionPhotos = ExcursionAddDto.Photos.Select(x => new ExcursionPhoto {
-                ExcursionId = storedExcursion.Id,
-                Photo = x.FileName
-            }).ToList();
-            ExcursionRepository.StoreExcursionPhotos(storedExcursion.Id, excursionPhotos);
         }
+
 
     }
 }

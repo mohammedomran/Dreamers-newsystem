@@ -254,13 +254,15 @@
         </div>
         <div class="activities-carousel">
             <div class="owl-carousel owl-theme image-hover">
+                @foreach(var excursion in Model.Excursions)
+                {
                 <div class="item">
-                    <a href="tour-description.html">
+                        <a href="/excursions/@excursion.Name">
                         <figure class="activitie-thumb zoom-in">
-                            <img src="https://via.placeholder.com//800x1250" alt="">
+                                <img src="@excursion.MainPhotoPath" alt="@excursion.Title">
                             <div class="price-layer rounded-pill">
                                 <div class="price-box">
-                                    <h4>$ 450</h4>
+                                    <h4>$ @excursion.Price</h4>
                                 </div>
                             </div>
                             <div class="activitie-info">
@@ -278,127 +280,12 @@
                                         <p class="rating-count">398 Ratings</p>
                                     </div>
                                 </div>
-                                <p>Swim with manta rays and walk with Komodo dragons in the world-famous Komodo National Park.</p>
+                                <p>@Html.Raw(excursion.Introduction)</p>
                             </div>
                         </figure>
                     </a>
                 </div>
-                <div class="item">
-                    <a href="tour-description.html">
-                        <figure class="activitie-thumb zoom-in">
-                            <img src="https://via.placeholder.com//800x1250" alt="">
-                            <div class="price-layer rounded-pill">
-                                <div class="price-box">
-                                    <h4>$ 150</h4>
-                                </div>
-                            </div>
-                            <div class="activitie-info">
-                                <h4>Scuba Diving</h4>
-                                <div class="media">
-                                    <h3 class="mt-0">9.2</h3>
-                                    <div class="media-body">
-                                        <ul class="activity-rating">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <p class="rating-count">250 Ratings</p>
-                                    </div>
-                                </div>
-                                <p>We invite you dive the coastline first discovered by Columbus by Dressel Divers. You can’t help feeling shipwreck.</p>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="tour-description.html">
-                        <figure class="activitie-thumb zoom-in">
-                            <img src="https://via.placeholder.com//800x1250" alt="">
-                            <div class="price-layer rounded-pill">
-                                <div class="price-box">
-                                    <h4>$ 110</h4>
-                                </div>
-                            </div>
-                            <div class="activitie-info">
-                                <h4>Paragliding</h4>
-                                <div class="media">
-                                    <h3 class="mt-0">8.5</h3>
-                                    <div class="media-body">
-                                        <ul class="activity-rating">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <p class="rating-count">600 Ratings</p>
-                                    </div>
-                                </div>
-                                <p>Caribbean’s highest mountain ranges, tucked in the heart of the country, where you’ll find the lushest.</p>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="tour-description.html">
-                        <figure class="activitie-thumb zoom-in">
-                            <img src="https://via.placeholder.com//800x1250" alt="">
-                            <div class="price-layer rounded-pill">
-                                <div class="price-box">
-                                    <h4>$ 130</h4>
-                                </div>
-                            </div>
-                            <div class="activitie-info">
-                                <h4>Horse riding</h4>
-                                <div class="media">
-                                    <h3 class="mt-0">9.5</h3>
-                                    <div class="media-body">
-                                        <ul class="activity-rating">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <p class="rating-count">611 Ratings</p>
-                                    </div>
-                                </div>
-                                <p>Hop on a guided horseback ride around Constanza’s gorgeous valleys and villages. Routes offered include.</p>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="tour-description.html">
-                        <figure class="activitie-thumb zoom-in">
-                            <img src="https://via.placeholder.com//800x1250" alt="">
-                            <div class="price-layer rounded-pill">
-                                <div class="price-box">
-                                    <h4>$ 125</h4>
-                                </div>
-                            </div>
-                            <div class="activitie-info">
-                                <h4>ATV</h4>
-                                <div class="media">
-                                    <h3 class="mt-0">8.8</h3>
-                                    <div class="media-body">
-                                        <ul class="activity-rating">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <p class="rating-count">411 Ratings</p>
-                                    </div>
-                                </div>
-                                <p>Where you will receive a safety briefing about how to operate your ATV and where friendly.</p>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
+                }
             </div>
         </div>
     </div>

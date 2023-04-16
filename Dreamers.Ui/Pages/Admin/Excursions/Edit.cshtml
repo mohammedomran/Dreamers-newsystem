@@ -4,75 +4,94 @@
     Layout = "../_AdminLayout";
 }
 
-<a href="/admin/excursions">Show Excursions</a>
+<a href="/admin/ExcursionAddDtos">Show Excursions</a>
 
-<form class="row" method="post" enctype="multipart/form-data">
+<form class="row" method="post" enctype="multipart/form-data" asp-page-handler="TextData">
 
     <div class="form-group col-6">
         <label>Name</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.Name" value="@Model.Excursion.Name">
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Name" value="@Model.Excursion?.Name">
     </div>
     <div class="form-group col-6">
         <label>Price</label>
-        <input type="number" class="form-control" asp-for="ExcursionAddDto.Price" value="@Model.Excursion.Price">
-    </div>
-
-    <div class="form-group col-6">
-        <label>MainPhoto</label>
-        <img src="@Model.Excursion.MainPhotoPath" height="80" class="mb-2" />
-        <input type="file" class="form-control" asp-for="ExcursionAddDto.MainPhoto" value="@Model.Excursion.MainPhoto">
-    </div>
-    <div class="form-group col-6">
-        <label>Banner Photo</label>
-        <img src="@Model.Excursion.BannerPhotoPath" height="80" class="mb-2" />
-        <input type="file" class="form-control" asp-for="ExcursionAddDto.BannerPhoto" value="@Model.Excursion.BannerPhoto">
-    </div>
-    <div class="form-group col-6">
-        <label>Excursion Photos</label>
-        @foreach (var photo in Model.Excursion.ExcursionPhotos)
-        {
-            <img src="@photo.PhotoPath" height="80" class="mb-2" />
-        }
-
-        <input type="file" multiple class="form-control" asp-for="ExcursionAddDto.Photos">
+        <input type="number" class="form-control" asp-for="ExcursionAddDto.Price" value="@Model.Excursion?.Price">
     </div>
 
     <div class="form-group col-12">
         <label>Video link</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.VideoLink" value="@Model.Excursion.VideoLink">
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.VideoLink" value="@Model.Excursion?.VideoLink">
     </div>
-
-
 
     <div class="form-group col-12">
         <label>Title</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.Title">
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Title" value="@Model.Excursion?.Title">
     </div>
 
     <div class="form-group col-6">
         <label>Period</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.Period">
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.Period" value="@Model.Excursion?.Period">
     </div>
     <div class="form-group col-6">
         <label>City</label>
-        <input type="text" class="form-control" asp-for="ExcursionAddDto.City">
+        <input type="text" class="form-control" asp-for="ExcursionAddDto.City" value="@Model.Excursion?.City">
     </div>
 
     <div class="form-group col-12">
         <label>Introduction</label>
-        <textarea class="form-control" asp-for="ExcursionAddDto.Introduction"></textarea>
+        <textarea class="form-control" asp-for="ExcursionAddDto.Introduction">@Model.ExcursionAddDto.Introduction</textarea>
     </div>
     <div class="form-group col-12">
         <label>Description</label>
-        <textarea class="form-control" rows="4" asp-for="ExcursionAddDto.Description"></textarea>
+        <textarea class="form-control" rows="4" asp-for="ExcursionAddDto.Description">@Model.ExcursionAddDto.Description</textarea>
     </div>
 
     <div class="form-group col-12">
         <label>Banner Description</label>
-        <textarea class="form-control" asp-for="ExcursionAddDto.BannerDescription"></textarea>
+        <textarea class="form-control" asp-for="ExcursionAddDto.BannerDescription">@Model.ExcursionAddDto.BannerDescription</textarea>
     </div>
 
     <div class="form-group col-6">
         <button type="submit" class="form-control btn btn-primary">Submit</button>
     </div>
 </form>
+
+<div class="row">
+
+    <form class="col-6" method="post" asp-page-handler="MainPhoto" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>MainPhoto</label><br />
+            <img src="@Model.Excursion?.MainPhotoPath" height="80" class="mb-2" />
+            <input type="file" class="form-control" name="MainPhoto" value="@Model.Excursion?.MainPhoto">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="form-control btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <form class="col-6" method="post" asp-page-handler="BannerPhoto" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>BannerPhoto</label><br />
+            <img src="@Model.Excursion?.BannerPhotoPath" height="80" class="mb-2" />
+            <input type="file" class="form-control" name="BannerPhoto" value="@Model.Excursion?.BannerPhoto">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="form-control btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <form class="col-12" method="post" asp-page-handler="ExcursionPhotos" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Excursion Photos</label>
+            @foreach (var photo in Model.Excursion.ExcursionPhotos)
+            {
+                <img src="@photo.PhotoPath" height="80" class="mb-2" />
+                <button name="submitButton" value="delete" class="btn btn-danger">Delete</button>
+            }
+            <input type="file" multiple class="form-control" asp-for="ExcursionAddDto.Photos">
+        </div>
+        <div class="form-group">
+            <button name="submitButton" value="storephoto" type="submit" class="form-control btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>

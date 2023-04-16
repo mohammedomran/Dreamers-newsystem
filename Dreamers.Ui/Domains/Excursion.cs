@@ -13,6 +13,8 @@ namespace Dreamers.Ui.Models
         public string Introduction => ExcursionLocalizeds.FirstOrDefault().Introduction;
         public string Description => ExcursionLocalizeds.FirstOrDefault().Description;
         public string BannerDescription => ExcursionLocalizeds.FirstOrDefault().BannerDescription;
+        public string Period => ExcursionLocalizeds.FirstOrDefault().Period;
+        public string City => ExcursionLocalizeds.FirstOrDefault().City;
     }
 
     public partial class ExcursionPhoto
